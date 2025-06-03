@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "dev": "concurrently -k -n UI,ELECTRON -c cyan,green \"yarn dev:ui\" \"yarn dev:electron\"",
-    "dev:ui": "cd ../selene-ui && yarn dev",
+    "dev:ui": "cd ../selene-ui-react && yarn dev",
     "dev:electron": "wait-on -t 10000 tcp:5173 && echo '✅ UI ready, starting Electron...' && electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

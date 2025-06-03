@@ -16,10 +16,7 @@ function createWindow () {
     },
   })
   win.webContents.openDevTools();
-
-  // win.loadURL('http://localhost:5173'); // ✅ 重要
-  win.loadURL('http://localhost:5173') // 开发时加载 Vite，本地页面
-
+  win.loadURL('http://localhost:5173') // ✅ 重要 开发时加载 Vite，本地页面
   win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
     console.error('❌ Failed to load:', validatedURL, errorDescription);
   });
