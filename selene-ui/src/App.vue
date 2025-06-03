@@ -1,7 +1,37 @@
 <script setup lang="ts">
+import { onMounted, onBeforeMount, ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+let apiUrl = 'http://127.0.0.1:5550/api'
+
+
+const messageFromApi = ref('')
+async function getMessage() {
+  try {
+    const response = await fetch(apiUrl + '/msg')
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`)
+    }
+    messageFromApi.value = await response.json()
+    console.log(messageFromApi)
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+onBeforeMount(async () => {
+  console.log(`onBeforeMount`)
+  getMessage()
+})
+onMounted(() => {
+  console.log(`the component is now mounted.`)
+})
+
 </script>
+
+
+
 
 <template>
   <header>
@@ -9,6 +39,8 @@ import HelloWorld from './components/HelloWorld.vue'
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <HelloWorld :msg="messageFromApi" />
+
 
       <nav>
         <RouterLink to="/">Home</RouterLink>

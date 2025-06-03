@@ -1,26 +1,52 @@
-const { app, BrowserWindow } = require('electron/main')
+// electron/main.js
+const { app, BrowserWindow } = require('electron')
+const path = require('path')
+const { spawn } = require('child_process')
 
-const createWindow = () => {
+let pythonProcess
+
+function createWindow () {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1000,
+    height: 800,
+    webPreferences: {
+      // preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: false,
+      nodeIntegration: true,
+    },
   })
+  win.webContents.openDevTools();
 
-  win.loadFile('index.html')
+  // win.loadURL('http://localhost:5173'); // ✅ 重要
+  win.loadURL('http://localhost:5173') // 开发时加载 Vite，本地页面
+
+  win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    console.error('❌ Failed to load:', validatedURL, errorDescription);
+  });
+  win.webContents.on('did-finish-load', () => {
+    console.log('✅ Page loaded');
+  });
+  // 打包后这样写：win.loadFile(path.join(__dirname, '../dist/index.html'))
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  console.log('✅ Electron App Ready');
+  const venvPythonPath = path.join(__dirname, '../selene-server/.venv/bin/python')  // ⬅️ macOS/Linux
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
+  // 启动 Python 子进程（开发时）
+  pythonProcess = spawn(venvPythonPath, ['../selene-server/main.py'])
+
+  pythonProcess.stdout.on('data', data => {
+    console.log(`[python]: ${data}`)
   })
+
+  pythonProcess.stderr.on('data', data => {
+    console.error(`[python error]: ${data}`)
+  })
+
+  createWindow()
 })
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+app.on('will-quit', () => {
+  pythonProcess.kill()
 })

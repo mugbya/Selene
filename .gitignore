@@ -136,3 +136,7 @@ dist
 .pnp.*
 
 selene-client/node_modules
+selene-ui/node_modules
+
+selene-server/main.spec
+selene-server/build

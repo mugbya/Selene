@@ -5,12 +5,17 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "dev": "concurrently -k -n UI,ELECTRON -c cyan,green \"yarn dev:ui\" \"yarn dev:electron\"",
+    "dev:ui": "cd ../selene-ui && yarn dev",
+    "dev:electron": "wait-on -t 10000 tcp:5173 && echo '✅ UI ready, starting Electron...' && electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "mugbya",
   "license": "apache-2.0",
   "packageManager": "yarn@4.6.0",
   "devDependencies": {
-    "electron": "^36.3.2"
+    "concurrently": "^9.1.2",
+    "electron": "^36.3.2",
+    "wait-on": "^8.0.3"
   }
 }
