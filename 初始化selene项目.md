@@ -1,7 +1,10 @@
 
 ```bash
 cd selene-client
-pnpm init
+yarn init
 
-pnpm install electron --save-dev
+yarn add electron --dev
+
+
+yarn run start
 ```

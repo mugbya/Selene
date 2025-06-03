@@ -1,15 +1,15 @@
 {
-  "name": "selene",
+  "name": "selene-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Hello World!",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "author": "mugbya",
   "license": "apache-2.0",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "yarn@4.6.0",
   "devDependencies": {
     "electron": "^36.3.2"
   }
