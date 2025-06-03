@@ -1,12 +1,39 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+创建 Vite + React 项目
+```bash
+yarn create vite selene-ui-react --template react
+cd selene-ui-react
+yarn
+yarn dev
+```
 
-Currently, two official plugins are available:
+避免 tsx 文件一直报错
+```bash
+yarn add react react-dom
+yarn add -D typescript @types/react @types/react-dom
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+yarn dlx shadcn@latest init
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+安装 Tailwind CSS
+```bash
+# yarn remove postcss
+yarn add -D tailwindcss  autoprefixer
+yarn add tailwindcss @tailwindcss/vite
+```
+
+
+安装组件，例如：
+```bash
+yarn dlx shadcn@latest add button
+yarn dlx shadcn@latest add card scroll-area
+
+```
+
+你可以在页面中使用：
+```tsx
+<Button variant="default">Hello Shadcn</Button>
+```
