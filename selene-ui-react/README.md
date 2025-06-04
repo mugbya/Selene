@@ -14,7 +14,7 @@ yarn add react react-dom
 yarn add -D typescript @types/react @types/react-dom
 ```
 
-yarn dlx shadcn@latest init
+
 
 
 
@@ -23,6 +23,11 @@ yarn dlx shadcn@latest init
 # yarn remove postcss
 yarn add -D tailwindcss  autoprefixer
 yarn add tailwindcss @tailwindcss/vite
+```
+
+`shadcn/ui` 是一个基于 React 和 Tailwind CSS 的现代化 UI 组件库
+```bash
+yarn dlx shadcn@latest init
 ```
 
 
